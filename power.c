@@ -11,17 +11,5 @@ double Pow(double x, int y) {
 }
 
 double Exp(int x) {
-	double sum = 1;
-	for (int i = 0; i < x; i++) {
-		sum *= e;
-	}
-	return sum;
+	return Pow(e,x);
 }
-
-//double Exp(int x) {
-//	double sum = 1;
-//	for (int i = 0; i < x; i++) {
-//		sum *= e;
-//	}
-//	return sum;
-//}

@@ -1,25 +1,25 @@
 
-all: power.o basicMath.o main.o mains mymaths maind libmyMath.a 
+all: power.o basicMath.o main.o mymaths mymathd mains maind  
 
 power.o: power.c myMath.h 
-	gcc -Wall -g -c power.c
-
+	gcc -Wall -g -fPIC -c power.c
+	
 basicMath.o: basicMath.c myMath.h 
 	gcc -Wall -g -c basicMath.c
 
 main.o: main.c myMath.h 
 	gcc -Wall -g -c main.c
 
-libmyMath.a: power.o basicMath.o
+mymaths: power.o basicMath.o
 	ar -rcs libmyMath.a power.o basicMath.o
 
-mains: main.o libmyMath.a 
+mains: mymaths main.o 
 	gcc -Wall -g -o mains main.o libmyMath.a
 
-maind: main.o
+maind: mymathd main.o
 	gcc -Wall -g -o maind main.o ./libmyMath.so
 
-mymaths: basicMath.o power.o 
+mymathd: basicMath.o power.o 
 	gcc -shared -o libmyMath.so basicMath.o power.o
 
 .PHONY: clean all
